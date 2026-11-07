@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApplication"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Height="434" VerticalAlignment="Top">
+    <Grid x:Name="name" Height="434" VerticalAlignment="Top">
 
         <WrapPanel x:Name="ListProducts" Margin="203,76,10,135"/>
 
@@ -20,11 +20,12 @@
             <ComboBoxItem>in München</ComboBoxItem>
         </ComboBox>
         <Label Content="Order" HorizontalAlignment="Left" Margin="56,30,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="Complete" Content="Complete" HorizontalAlignment="Left" Margin="113,374,0,0" VerticalAlignment="Top" Click="Complete_Click"/>
-        <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="10,374,0,0" VerticalAlignment="Top" Width="54" Click="Cancel_Click"/>
+        <Button x:Name="Complete" Content="Complete" HorizontalAlignment="Left" Margin="114,404,0,0" VerticalAlignment="Top" Click="Complete_Click"/>
+        <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="10,404,0,0" VerticalAlignment="Top" Width="54" Click="Cancel_Click"/>
         <ListBox x:Name="ListOrder" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,67,622,78" SelectionChanged="ListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
+
                     <Border BorderBrush="LightGray" 
                             BorderThickness="1" 
                             Margin="2"
@@ -35,17 +36,23 @@
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="{Binding nameProduct}" FontSize="18"/>
                             <TextBlock Text="{Binding Price}" Grid.Column="1"/>
                             <TextBlock Text="{Binding CountProduct}" Grid.Column="2"/>
                             <TextBlock Text="{Binding DateWrite}" Grid.Column="3"/>
+                            <Button Content="BAcket" Click="DeleteThisBill_Click" Grid.Column="4"/>
                             
+
                         </Grid>
                     </Border>
 
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        
+        <Label Content="до оплаты" Margin="0,366,724,30"/>
+        <Label x:Name="Cost" Content="0€" HorizontalAlignment="Left" Margin="114,367,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
