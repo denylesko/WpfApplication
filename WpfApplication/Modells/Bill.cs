@@ -19,7 +19,7 @@ namespace WpfApplication.Modells
             get => countProduct;
             set
             {
-                if (countProduct != value)
+                if (countProduct == value)
                     return;
                 
                     countProduct = value;
