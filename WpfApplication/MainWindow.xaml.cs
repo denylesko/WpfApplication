@@ -188,16 +188,18 @@ namespace WpfApplication
                 if (item.idProduct == idDish)
                 {
                     item.CountProduct += int.Parse(TxtCount.Text);
+                    CalculateTotal();
                     return;
                 }
             }
             orderProducts.Add(new Bill
             {
                 idProduct = this_product.ProductId,
-                countProduct = int.Parse(TxtCount.Text),
+                CountProduct = int.Parse(TxtCount.Text),
                 nameProduct = this_product.ProductName,
                 DateWrite = DateTime.UtcNow
-            });
+            }); 
+            CalculateTotal();
         }
         public Product GetProductById(int id)
         {
@@ -210,9 +212,31 @@ namespace WpfApplication
             }
             return null;
         }
+        public void CalculateTotal()
+        {
+            float total = 0;
 
+            foreach (Bill bill in orderProducts)
+            {
+                Product product = GetProductById(bill.idProduct);
+                if (product != null)
+                {
+                    total += product.ProductPrice * bill.countProduct;
+                }
+                    
+            }
+            Cost.Content = $"Total: {total}€";
+        }
+        private void DeleteThisBill_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            Bill bill = (Bill)button.DataContext as Bill;
+            if (bill != null)
+            {
+                orderProducts.Remove(bill);
+                CalculateTotal();
+            }
+        }
     }
- 
-
 
 }
