@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -23,11 +23,10 @@ namespace WpfApplication
     {
         ObservableCollection<Product> products = new ObservableCollection<Product>();
         ObservableCollection<Bill> orderProducts = new ObservableCollection<Bill>();
-        private const string ConnectionString =
-        "User=SYSDBA;Password=masterkey;" +
-        "Database=/home/ubuntu/BASE_Denis.FDB;" +
-        "DataSource=13.63.178.6;Port=3050;Dialect=3;Charset=UTF8;" +
-        "authPlugins=Srp256,Srp,Legacy_Auth;";
+        private static string ConnectionString =>
+            Environment.GetEnvironmentVariable("FIREBIRD_CONNECTION_STRING")
+            ?? throw new InvalidOperationException("Set the FIREBIRD_CONNECTION_STRING environment variable.");
+
         public MainWindow()
         {
             InitializeComponent();
